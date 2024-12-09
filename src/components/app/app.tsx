@@ -5,7 +5,7 @@ import FavoritePage from '../../pages/favorites-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
-import PrivatRoute from '../../pages/privat-rout/privat-rout';
+import PrivatRoute from '../../pages/protect-route/protect-route';
 
 export default function App(): JSX.Element {
   return (
