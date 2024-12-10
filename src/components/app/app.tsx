@@ -1,5 +1,5 @@
-import { CardQuantity, RoutePath, LoginStatus } from '../../const';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { RoutePath, LoginStatus } from '../../const';
+import { Routes, Route } from 'react-router-dom';
 import { OfferType } from '../../types';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritePage from '../../pages/favorites-page/favorite-page';
@@ -10,26 +10,24 @@ import PrivatRoute from '../../pages/protect-route/protect-route';
 
 type Props = {
   offers: OfferType[];
+  allPlaces: number;
 }
 
-export default function App({ offers }: Props): JSX.Element {
+export default function App({ allPlaces, offers }: Props): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={RoutePath.Main} element={<MainPage allPlaces={CardQuantity.AllPlaces} offers={offers}/>}/>
-        <Route path={RoutePath.Login} element={<LoginPage/>}/>
-        <Route
-          path={RoutePath.Favorites}
-          element={
-            <PrivatRoute loginStatus={LoginStatus.NotAuth}>
-              <FavoritePage/>
-            </PrivatRoute>
-          }
-        />
-        <Route path={RoutePath.Offer} element={<OfferPage/>}/>
-        <Route path={RoutePath.NOT_FAUND} element={<NotFound/>}/>
-      </Routes>
-    </BrowserRouter>
-
+    <Routes>
+      <Route path={RoutePath.Main} element={<MainPage allPlaces={allPlaces} offers={offers} />} />
+      <Route path={RoutePath.Login} element={<LoginPage />} />
+      <Route
+        path={RoutePath.Favorites}
+        element={
+          <PrivatRoute loginStatus={LoginStatus.Auth}>
+            <FavoritePage offers={offers}/>
+          </PrivatRoute>
+        }
+      />
+      <Route path={RoutePath.Offer} element={<OfferPage />} />
+      <Route path={RoutePath.NOT_FAUND} element={<NotFound />} />
+    </Routes>
   );
 }

@@ -23,7 +23,7 @@ export type OfferType = {
   previewImage: string;
 }
 
-export type CardType = 'favorites'| 'cities';
+export type CardType = 'favorites'|'cities';
 
 export type CityName = string;
 

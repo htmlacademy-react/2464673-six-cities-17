@@ -2,16 +2,14 @@ import CardList from '../../components/card-list/card-list';
 import Header from '../../components/header/header';
 import { OfferType } from '../../types';
 
-type MainPageType = {
-  allPlaces: number;
-}
 
 type Props = {
   offers: OfferType[];
+  allPlaces: number;
 }
 
 
-export default function MainPage({offers}: Props, {allPlaces}: MainPageType): JSX.Element {
+export default function MainPage({allPlaces, offers}: Props): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header/>
