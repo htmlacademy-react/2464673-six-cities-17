@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import CardList from '../../components/card-list/card-list';
 import Header from '../../components/header/header';
 import { OfferType } from '../../types';
@@ -10,6 +11,9 @@ type Props = {
 
 
 export default function MainPage({allPlaces, offers}: Props): JSX.Element {
+  const [isActiveOffer, setIsActiveOffer] = useState<string | null>(null);
+
+  const hendleActiveOfferChange = (id: string | null) => setIsActiveOffer(id);
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -71,7 +75,7 @@ export default function MainPage({allPlaces, offers}: Props): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList offers={offers}/>
+              <CardList onHendleActiveOfferChange={hendleActiveOfferChange} offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

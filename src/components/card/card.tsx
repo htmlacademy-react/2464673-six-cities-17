@@ -3,14 +3,19 @@ import { OfferType, CardType } from '../../types';
 type Props = {
   offer: OfferType;
   cardType: CardType;
+  onHendleActiveOfferChange?: (id: string | null) => void;
 }
 
-export default function Card({offer, cardType}: Props): JSX.Element {
+export default function Card({offer, cardType, onHendleActiveOfferChange}: Props): JSX.Element {
   const {rating, previewImage, price, isPremium, title, type} = offer;
   const placeRating = rating || 0;
 
   return (
-    <article className={`${cardType}__card place-card`}>
+    <article
+      className={`${cardType}__card place-card`}
+      onMouseEnter={() => onHendleActiveOfferChange && onHendleActiveOfferChange(offer.id)}
+      onMouseLeave={() => onHendleActiveOfferChange && onHendleActiveOfferChange(null)}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -18,7 +23,13 @@ export default function Card({offer, cardType}: Props): JSX.Element {
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={cardType === 'favorites' ? 150 : 260}
+            height={cardType === 'favorites' ? 110 : 200}
+            alt="Place image"
+          />
         </a>
       </div>
       <div className="place-card__info">
