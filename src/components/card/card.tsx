@@ -1,4 +1,6 @@
 import { OfferType, CardType } from '../../types';
+import { Link } from 'react-router-dom';
+import { RoutePath } from '../../const';
 
 type Props = {
   offer: OfferType;
@@ -22,7 +24,7 @@ export default function Card({offer, cardType, onHendleActiveOfferChange}: Props
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={RoutePath.Offer}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -30,7 +32,7 @@ export default function Card({offer, cardType, onHendleActiveOfferChange}: Props
             height={cardType === 'favorites' ? 110 : 200}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -52,7 +54,7 @@ export default function Card({offer, cardType, onHendleActiveOfferChange}: Props
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to="#">{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
