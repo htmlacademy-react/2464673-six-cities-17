@@ -9,7 +9,6 @@ type Props = {
   allPlaces: number;
 }
 
-
 export default function MainPage({allPlaces, offers}: Props): JSX.Element {
   const [isActiveOffer, setIsActiveOffer] = useState<string | null>(null);
 
