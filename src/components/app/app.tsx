@@ -26,7 +26,7 @@ export default function App({ allPlaces, offers }: Props): JSX.Element {
           </PrivatRoute>
         }
       />
-      <Route path={RoutePath.Offer} element={<OfferPage />} />
+      <Route path={RoutePath.Offer} element={<OfferPage offers={offers}/>} />
       <Route path={RoutePath.NOT_FAUND} element={<NotFound />} />
     </Routes>
   );
