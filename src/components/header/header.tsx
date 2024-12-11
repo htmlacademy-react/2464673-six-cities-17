@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RoutePath } from '../../const'
+import { RoutePath } from '../../const';
 
 export default function Header(): JSX.Element {
   return (

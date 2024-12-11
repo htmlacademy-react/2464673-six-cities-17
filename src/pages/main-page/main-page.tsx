@@ -86,3 +86,4 @@ export default function MainPage({allPlaces, offers}: Props): JSX.Element {
     </div>
   );
 }
+
