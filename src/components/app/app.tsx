@@ -1,4 +1,4 @@
-import { RoutePath, LoginStatus } from '../../const';
+import { RoutePath, LoginStatus, DEFAULT_CITY } from '../../const';
 import { Routes, Route } from 'react-router-dom';
 import { OfferType } from '../../types';
 import MainPage from '../../pages/main-page/main-page';
@@ -7,6 +7,8 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
 import PrivatRoute from '../../pages/protect-route/protect-route';
+import { useState } from 'react';
+
 
 type Props = {
   offers: OfferType[];
@@ -14,9 +16,14 @@ type Props = {
 }
 
 export default function App({ allPlaces, offers }: Props): JSX.Element {
+  const [activeCity, setActiveCity] = useState<string>(DEFAULT_CITY);
+
+  const handleCityClick = (city: string) => {
+    setActiveCity(city);
+  };
   return (
     <Routes>
-      <Route path={RoutePath.Main} element={<MainPage allPlaces={allPlaces} offers={offers} />} />
+      <Route path={RoutePath.Main} element={<MainPage onHandleCityClick={handleCityClick} activeCity={activeCity} allPlaces={allPlaces} offers={offers} />} />
       <Route path={RoutePath.Login} element={<LoginPage />} />
       <Route
         path={RoutePath.Favorites}
