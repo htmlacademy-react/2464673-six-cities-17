@@ -5,18 +5,18 @@ import { RoutePath } from '../../const';
 type Props = {
   offer: OfferType;
   cardType: CardType;
-  onHendleActiveOfferChange?: (id: string | null) => void;
+  onHandleActiveOfferChange?: (id: string | undefined) => void;
 }
 
-export default function Card({offer, cardType, onHendleActiveOfferChange}: Props): JSX.Element {
+export default function Card({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
   const {rating, previewImage, price, isPremium, title, type} = offer;
   const placeRating = rating || 0;
 
   return (
     <article
       className={`${cardType}__card place-card`}
-      onMouseEnter={() => onHendleActiveOfferChange && onHendleActiveOfferChange(offer.id)}
-      onMouseLeave={() => onHendleActiveOfferChange && onHendleActiveOfferChange(null)}
+      onMouseEnter={() => onHandleActiveOfferChange && onHandleActiveOfferChange(offer.id)}
+      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(undefined)}
     >
       {isPremium && (
         <div className="place-card__mark">
