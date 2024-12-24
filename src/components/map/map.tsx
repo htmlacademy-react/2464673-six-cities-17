@@ -8,7 +8,7 @@ import 'leaflet/dist/leaflet.css';
 type MapProps = {
   offers: OfferType[];
   activeOfferId: string | undefined;
-  activeCity: string;
+  activeCityName: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -24,8 +24,8 @@ const currentCustomIcon = new Icon({
 });
 
 export default function Map(props: MapProps): JSX.Element {
-  const {offers, activeCity, activeOfferId} = props;
-  const cityWithLocation: LocationType = Locations[activeCity];
+  const {offers, activeCityName, activeOfferId} = props;
+  const cityWithLocation: LocationType = Locations[activeCityName];
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityWithLocation);
   const markerLayer = useRef<LayerGroup>(layerGroup());

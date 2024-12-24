@@ -12,10 +12,9 @@ import { useState } from 'react';
 
 type Props = {
   offers: OfferType[];
-  allPlaces: number;
 }
 
-export default function App({ allPlaces, offers }: Props): JSX.Element {
+export default function App({ offers }: Props): JSX.Element {
   const [activeCity, setActiveCity] = useState<string>(DEFAULT_CITY);
 
   const handleCityClick = (city: string) => {
@@ -23,7 +22,7 @@ export default function App({ allPlaces, offers }: Props): JSX.Element {
   };
   return (
     <Routes>
-      <Route path={RoutePath.Main} element={<MainPage onHandleCityClick={handleCityClick} activeCity={activeCity} allPlaces={allPlaces} offers={offers} />} />
+      <Route path={RoutePath.Main} element={<MainPage onHandleCityClick={handleCityClick} activeCityName={activeCity} offers={offers} />} />
       <Route path={RoutePath.Login} element={<LoginPage />} />
       <Route
         path={RoutePath.Favorites}

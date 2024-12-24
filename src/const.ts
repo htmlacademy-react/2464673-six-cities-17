@@ -1,9 +1,5 @@
 import { LocationType } from './types';
 
-export const CardQuantity = {
-  AllPlaces: 312,
-} as const;
-
 export enum RoutePath {
   Main = '/',
   Login = '/login',
