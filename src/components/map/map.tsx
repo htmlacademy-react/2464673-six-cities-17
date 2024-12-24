@@ -61,5 +61,5 @@ export default function Map(props: MapProps): JSX.Element {
     }
   }, [map, offers, activeOfferId]);
 
-  return <div style={{height: '700px'}} ref={mapRef}></div>;
+  return <div style={{height: '100%'}} ref={mapRef}></div>;
 }

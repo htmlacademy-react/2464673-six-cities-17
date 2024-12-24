@@ -5,6 +5,7 @@ import { OfferType } from '../../types';
 import Map from '../../components/map/map';
 import City from '../../components/city/city';
 
+
 type Props = {
   offers: OfferType[];
   allPlaces: number;
@@ -25,7 +26,7 @@ export default function MainPage({ allPlaces, offers, activeCity, onHandleCityCl
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <City onHandleCityClick={onHandleCityClick} activeCity={activeCity}/>
+            <City onHandleCityClick={onHandleCityClick} activeCityName={activeCity}/>
           </section>
         </div>
         <div className="cities">
@@ -48,7 +49,7 @@ export default function MainPage({ allPlaces, offers, activeCity, onHandleCityCl
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList onHandleActiveOfferChange={handleActiveCardChange} offers={offers} />
+              <CardList activeCityName={activeCity} onHandleActiveOfferChange={handleActiveCardChange} offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

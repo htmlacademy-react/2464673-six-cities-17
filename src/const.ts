@@ -19,8 +19,8 @@ export enum LoginStatus {
 }
 
 export const Marcers = {
-  DEFAULT: 'marcup/img/pin.svg',
-  ACTIVE: 'marcup/img/pin-active.svg'
+  DEFAULT: 'img/pin.svg',
+  ACTIVE: 'img/pin-active.svg'
 } as const;
 
 export enum Cities {
