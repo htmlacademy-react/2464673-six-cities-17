@@ -1,6 +1,6 @@
 import { RoutePath, LoginStatus, DEFAULT_CITY } from '../../const';
 import { Routes, Route } from 'react-router-dom';
-import { OfferType } from '../../types';
+import { OfferType, ReviewsType } from '../../types';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritePage from '../../pages/favorites-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -12,9 +12,10 @@ import { useState } from 'react';
 
 type Props = {
   offers: OfferType[];
+  reviews: ReviewsType[];
 }
 
-export default function App({ offers }: Props): JSX.Element {
+export default function App({ offers, reviews }: Props): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
 
   const handleActiveOfferChange = (id: string | undefined) => setActiveOfferId(id);
@@ -28,7 +29,7 @@ export default function App({ offers }: Props): JSX.Element {
   const offersCount: number = filteredOffers.length;
   return (
     <Routes>
-      <Route path={RoutePath.Main} element={<MainPage activeOfferId={activeOfferId} onHandleActiveOfferChange={handleActiveOfferChange} filteredOffers={filteredOffers} offersCount={offersCount} onHandleCityClick={handleCityClick} activeCityName={activeCityName} offers={offers} />} />
+      <Route path={RoutePath.Main} element={<MainPage activeCityName={activeCityName} activeOfferId={activeOfferId} onHandleActiveOfferChange={handleActiveOfferChange} filteredOffers={filteredOffers} offersCount={offersCount} onHandleCityClick={handleCityClick} offers={offers} />} />
       <Route path={RoutePath.Login} element={<LoginPage />} />
       <Route
         path={RoutePath.Favorites}
@@ -38,7 +39,7 @@ export default function App({ offers }: Props): JSX.Element {
           </PrivatRoute>
         }
       />
-      <Route path={RoutePath.Offer} element={<OfferPage filteredOffers={filteredOffers} onHandleActiveOfferChange={handleActiveOfferChange} />} />
+      <Route path={RoutePath.Offer} element={<OfferPage activeCityName={activeCityName} offers={offers} activeOfferId={activeOfferId} filteredOffers={filteredOffers} reviews={reviews}/>} />
       <Route path={RoutePath.NOT_FAUND} element={<NotFound />} />
     </Routes>
   );

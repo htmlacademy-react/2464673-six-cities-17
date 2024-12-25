@@ -7,7 +7,7 @@ type Props = {
   city: string;
 }
 
-export default function FavoriteGroup({ offers, city }: Props) {
+export default function FavoriteGroup({ offers, city }: Props): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
