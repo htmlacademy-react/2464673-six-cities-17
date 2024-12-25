@@ -1,5 +1,5 @@
 import { OfferType } from '../../types';
-import Card from '../card/card';
+import OfferCard from '../offer-card/offer-card';
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -18,7 +18,7 @@ export default function FavoriteGroup({ offers, city }: Props) {
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((offer) => (<Card key={offer.id} offer={offer} cardType='favorites' />
+        {offers.map((offer) => (<OfferCard key={offer.id} offer={offer} cardType='favorites' />
         ))}
       </div>
     </li>

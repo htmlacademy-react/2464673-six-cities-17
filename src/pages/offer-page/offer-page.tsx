@@ -1,13 +1,15 @@
 import Header from '../../components/header/header';
-import Card from '../../components/card/card';
+import OfferCardList from '../../components/offer-card-list/offer-card-list';
 import { OfferType } from '../../types';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 
+
 type Props = {
-  offers: OfferType[];
+  filteredOffers: OfferType[];
+  onHandleActiveOfferChange: (id: string | undefined) => void;
 }
 
-export default function OfferPage({ offers }: Props): JSX.Element {
+export default function OfferPage({ onHandleActiveOfferChange, filteredOffers }: Props): JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -165,10 +167,7 @@ export default function OfferPage({ offers }: Props): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {offers.map((offer) => (<Card key={offer.id} offer={offer} cardType='cities' />
-              ))}
-            </div>
+            <OfferCardList filteredOffers={filteredOffers} onHandleActiveOfferChange={onHandleActiveOfferChange} />
           </section>
         </div>
       </main>

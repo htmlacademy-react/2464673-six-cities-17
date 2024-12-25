@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import CardList from '../../components/card-list/card-list';
+import OfferCardList from '../../components/offer-card-list/offer-card-list';
 import Header from '../../components/header/header';
 import { OfferType } from '../../types';
 import Map from '../../components/map/map';
@@ -10,16 +9,14 @@ type Props = {
   offers: OfferType[];
   activeCityName: string;
   onHandleCityClick: (city: string) => void;
-
+  offersCount: number;
+  filteredOffers: OfferType[];
+  activeOfferId: string | undefined;
+  onHandleActiveOfferChange: (id: string | undefined) => void;
 }
 
-export default function MainPage({ offers, activeCityName, onHandleCityClick }: Props): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
+export default function MainPage({ activeOfferId, filteredOffers, offersCount, offers, activeCityName, onHandleActiveOfferChange, onHandleCityClick }: Props): JSX.Element {
 
-  const handleActiveCardChange = (id: string | undefined) => setActiveOfferId(id);
-
-  const filteredOffers: OfferType[] = offers.filter((offer) => offer.city.name === activeCityName);
-  const offersCount: number = filteredOffers.length;
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -50,7 +47,7 @@ export default function MainPage({ offers, activeCityName, onHandleCityClick }: 
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList filteredOffers={filteredOffers} onHandleActiveOfferChange={handleActiveCardChange} />
+              <OfferCardList filteredOffers={filteredOffers} onHandleActiveOfferChange={onHandleActiveOfferChange} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

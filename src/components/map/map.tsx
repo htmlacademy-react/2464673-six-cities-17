@@ -2,7 +2,7 @@ import { OfferType, LocationType } from '../../types';
 import { useRef, useEffect } from 'react';
 import {Icon, Marker, LayerGroup, layerGroup} from 'leaflet';
 import useMap from '../hooks/useMap';
-import { Marcers, Locations } from '../../const';
+import { Marcer, Locations } from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
@@ -12,13 +12,13 @@ type MapProps = {
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: Marcers.DEFAULT,
+  iconUrl: Marcer.DEFAULT,
   iconSize: [30, 40],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: Marcers.ACTIVE,
+  iconUrl: Marcer.ACTIVE,
   iconSize: [30, 40],
   iconAnchor: [20, 40],
 });

@@ -8,7 +8,7 @@ type Props = {
   onHandleActiveOfferChange?: (id: string | undefined) => void;
 }
 
-export default function Card({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
+export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
   const {rating, previewImage, price, isPremium, title, type} = offer;
   const placeRating = rating || 0;
 
