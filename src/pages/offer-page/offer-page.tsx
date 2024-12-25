@@ -11,7 +11,6 @@ type Props = {
   offers: OfferType[];
   activeCityName: string;
   activeOfferId: string | undefined;
-  // onHandleActiveOfferChange: (id: string | undefined) => void;
   reviews: ReviewsType[];
 }
 
