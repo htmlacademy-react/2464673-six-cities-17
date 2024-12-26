@@ -2,15 +2,14 @@ import Header from '../../components/header/header';
 import OfferCardList from '../../components/offer-card-list/offer-card-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import { OfferType, ReviewsType } from '../../types';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
-
+import { OfferType, ReviewsType } from '../../types';
 
 type Props = {
   filteredOffers: OfferType[];
   offers: OfferType[];
   activeCityName: string;
-  activeOfferId: string | undefined;
+  activeOfferId: string | null;
   reviews: ReviewsType[];
 }
 

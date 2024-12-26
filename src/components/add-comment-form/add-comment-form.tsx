@@ -1,5 +1,6 @@
-import { RatingType } from '../../types';
 import { useState, ChangeEvent } from 'react';
+
+import { RatingType } from '../../types';
 
 type FormDataType = {
   rating: RatingType;
@@ -21,7 +22,7 @@ export default function AddCommentForm() {
     }));
   };
 
-  const handleChangeReviev = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChangeReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
       review: e.target.value,
@@ -128,7 +129,7 @@ export default function AddCommentForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleChangeReviev}
+        onChange={handleChangeReview}
         value={formData.review}
       />
       <div className="reviews__button-wrapper">

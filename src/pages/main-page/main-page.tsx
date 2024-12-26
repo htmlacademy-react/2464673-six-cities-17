@@ -2,7 +2,7 @@ import OfferCardList from '../../components/offer-card-list/offer-card-list';
 import Header from '../../components/header/header';
 import { OfferType } from '../../types';
 import Map from '../../components/map/map';
-import City from '../../components/city/city';
+import Cities from '../../components/cities/cities';
 
 
 type Props = {
@@ -11,8 +11,8 @@ type Props = {
   onHandleCityClick: (city: string) => void;
   offersCount: number;
   filteredOffers: OfferType[];
-  activeOfferId: string | undefined;
-  onHandleActiveOfferChange: (id: string | undefined) => void;
+  activeOfferId: string | null;
+  onHandleActiveOfferChange: (id: string | null) => void;
 }
 
 export default function MainPage({ activeOfferId, filteredOffers, offersCount, offers, activeCityName, onHandleActiveOfferChange, onHandleCityClick }: Props): JSX.Element {
@@ -24,7 +24,7 @@ export default function MainPage({ activeOfferId, filteredOffers, offersCount, o
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <City onHandleCityClick={onHandleCityClick} activeCityName={activeCityName}/>
+            <Cities onHandleCityClick={onHandleCityClick} activeCityName={activeCityName}/>
           </section>
         </div>
         <div className="cities">

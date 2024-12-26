@@ -1,4 +1,4 @@
-import Rivie from '../review/review';
+import Review from '../review/review';
 import { ReviewsType } from '../../types';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 export default function ReviewsList({reviewSlice}: Props): JSX.Element {
   return (
     <ul className="reviews__list">
-      {reviewSlice.map((review) => <Rivie key={review.id} review={review}/>)}
+      {reviewSlice.map((review) => <Review key={review.id} review={review}/>)}
     </ul>
   );
 }

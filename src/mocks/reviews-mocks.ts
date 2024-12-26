@@ -1,6 +1,6 @@
 import { ReviewsType } from '../types';
 
-export const RiviesMocks: ReviewsType[] = [
+export const ReviewsMocks: ReviewsType[] = [
   {
     id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
     date: '2019-05-08T14:13:56.569Z',
@@ -115,7 +115,7 @@ export const RiviesMocks: ReviewsType[] = [
     id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b612a',
     date: '2019-05-08T14:13:56.569Z',
     user: {
-      name: 'Stas',
+      name: 'Oscar',
       avatarUrl: 'https://url-to-image/image.png',
       isPro: false
     },

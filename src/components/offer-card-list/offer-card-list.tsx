@@ -3,7 +3,7 @@ import { OfferType } from '../../types';
 
 type Props = {
   filteredOffers: OfferType[];
-  onHandleActiveOfferChange?: (id: string | undefined) => void;
+  onHandleActiveOfferChange?: (id: string | null) => void;
 };
 
 export default function OfferCardList({ filteredOffers, onHandleActiveOfferChange}: Props) {

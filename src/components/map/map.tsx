@@ -1,24 +1,25 @@
-import { OfferType, LocationType } from '../../types';
 import { useRef, useEffect } from 'react';
 import {Icon, Marker, LayerGroup, layerGroup} from 'leaflet';
+
 import useMap from '../hooks/useMap';
-import { Marcer, Locations } from '../../const';
+import { OfferType, LocationType } from '../../types';
+import { ItemPin, Locations } from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   offers: OfferType[];
-  activeOfferId: string | undefined;
+  activeOfferId: string | null;
   activeCityName: string;
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: Marcer.DEFAULT,
+  iconUrl: ItemPin.DEFAULT,
   iconSize: [30, 40],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: Marcer.ACTIVE,
+  iconUrl: ItemPin.ACTIVE,
   iconSize: [30, 40],
   iconAnchor: [20, 40],
 });

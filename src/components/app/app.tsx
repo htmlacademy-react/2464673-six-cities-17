@@ -1,14 +1,14 @@
 import { RoutePath, LoginStatus, DEFAULT_CITY } from '../../const';
 import { Routes, Route } from 'react-router-dom';
-import { OfferType, ReviewsType } from '../../types';
+import { useState } from 'react';
+
 import MainPage from '../../pages/main-page/main-page';
 import FavoritePage from '../../pages/favorites-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
-import PrivatRoute from '../../pages/protect-route/protect-route';
-import { useState } from 'react';
-
+import ProtectRoute from '../../pages/protect-route/protect-route';
+import { OfferType, ReviewsType } from '../../types';
 
 type Props = {
   offers: OfferType[];
@@ -16,9 +16,9 @@ type Props = {
 }
 
 export default function App({ offers, reviews }: Props): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
-  const handleActiveOfferChange = (id: string | undefined) => setActiveOfferId(id);
+  const handleActiveOfferChange = (id: string | null) => setActiveOfferId(id);
 
   const [activeCityName, setActiveCity] = useState<string>(DEFAULT_CITY);
 
@@ -34,9 +34,9 @@ export default function App({ offers, reviews }: Props): JSX.Element {
       <Route
         path={RoutePath.Favorites}
         element={
-          <PrivatRoute loginStatus={LoginStatus.Auth}>
+          <ProtectRoute loginStatus={LoginStatus.Auth}>
             <FavoritePage offers={offers} />
-          </PrivatRoute>
+          </ProtectRoute>
         }
       />
       <Route path={RoutePath.Offer} element={<OfferPage activeCityName={activeCityName} offers={offers} activeOfferId={activeOfferId} filteredOffers={filteredOffers} reviews={reviews}/>} />

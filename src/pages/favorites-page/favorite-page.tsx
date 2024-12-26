@@ -1,15 +1,15 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import { OfferType } from '../../types';
-import { getOfferGroupes } from '../../adaptors';
 import FavoriteGroup from '../../components/favorite-group/favorite-group';
+import { OfferType } from '../../types';
+import { getOfferGroups } from '../../adaptors';
 
 type Props = {
   offers: OfferType[];
 }
 
 export default function FavoritePage({ offers }: Props): JSX.Element {
-  const offerGroups = getOfferGroupes(offers);
+  const offerGroups = getOfferGroups(offers);
 
   return (
     <div className="page">
@@ -19,13 +19,13 @@ export default function FavoritePage({ offers }: Props): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {Object.keys(offerGroups).map((grouKey) => {
-                const group: OfferType[] = offerGroups[grouKey];
+              {Object.keys(offerGroups).map((groupKey) => {
+                const group: OfferType[] = offerGroups[groupKey];
                 return (
                   <FavoriteGroup
-                    key={grouKey}
+                    key={groupKey}
                     offers={group}
-                    city={grouKey}
+                    city={groupKey}
                   />
                 );
               })}

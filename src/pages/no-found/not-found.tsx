@@ -1,5 +1,6 @@
-import { RoutePath } from '../../const';
 import { Link } from 'react-router-dom';
+
+import { RoutePath } from '../../const';
 
 export default function NotFound(): JSX.Element {
   return (

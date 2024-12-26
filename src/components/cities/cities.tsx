@@ -1,12 +1,13 @@
-import { CitiesArry } from '../../const';
 import { Link } from 'react-router-dom';
+
+import { CitiesArry } from '../../const';
 
 type Props = {
   activeCityName: string;
   onHandleCityClick: (city: string) => void;
 };
 
-export default function City({ activeCityName, onHandleCityClick }: Props): JSX.Element {
+export default function Cities({ activeCityName, onHandleCityClick }: Props): JSX.Element {
 
   return (
     <ul className="locations__list tabs__list">

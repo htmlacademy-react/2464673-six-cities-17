@@ -14,7 +14,7 @@ export enum LoginStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const Marcer = {
+export const ItemPin = {
   DEFAULT: 'img/pin.svg',
   ACTIVE: 'img/pin-active.svg'
 } as const;
