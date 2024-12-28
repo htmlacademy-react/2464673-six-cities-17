@@ -1,23 +1,20 @@
-import { useState } from 'react';
-import CardList from '../../components/card-list/card-list';
+import OfferCardList from '../../components/offer-card-list/offer-card-list';
 import Header from '../../components/header/header';
 import { OfferType } from '../../types';
 import Map from '../../components/map/map';
-import City from '../../components/city/city';
+import Cities from '../../components/cities/cities';
 
 
 type Props = {
-  offers: OfferType[];
-  allPlaces: number;
-  activeCity: string;
+  activeCityName: string;
   onHandleCityClick: (city: string) => void;
-
+  offersCount: number;
+  offersData: OfferType[];
+  activeOfferId: string | null;
+  onHandleActiveOfferChange: (id: string | null) => void;
 }
 
-export default function MainPage({ allPlaces, offers, activeCity, onHandleCityClick }: Props): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
-
-  const handleActiveCardChange = (id: string | undefined) => setActiveOfferId(id);
+export default function MainPage({ activeOfferId, offersData, offersCount, activeCityName, onHandleActiveOfferChange, onHandleCityClick }: Props): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -26,14 +23,14 @@ export default function MainPage({ allPlaces, offers, activeCity, onHandleCityCl
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <City onHandleCityClick={onHandleCityClick} activeCityName={activeCity}/>
+            <Cities onHandleCityClick={onHandleCityClick} activeCityName={activeCityName}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{allPlaces} places to stay in Amsterdam</b>
+              <b className="places__found">{offersCount} places to stay in {activeCityName}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -49,11 +46,11 @@ export default function MainPage({ allPlaces, offers, activeCity, onHandleCityCl
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList activeCityName={activeCity} onHandleActiveOfferChange={handleActiveCardChange} offers={offers} />
+              <OfferCardList offersData={offersData} onHandleActiveOfferChange={onHandleActiveOfferChange} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} activeCity={activeCity} activeOfferId={activeOfferId} />
+                <Map offersData={offersData} activeCityName={activeCityName} activeOfferId={activeOfferId} />
               </section>
             </div>
           </div>

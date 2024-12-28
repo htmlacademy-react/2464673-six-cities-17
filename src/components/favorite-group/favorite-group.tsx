@@ -1,13 +1,14 @@
-import { OfferType } from '../../types';
-import Card from '../card/card';
 import { Link } from 'react-router-dom';
+
+import { OfferType } from '../../types';
+import OfferCard from '../offer-card/offer-card';
 
 type Props = {
   offers: OfferType[];
   city: string;
 }
 
-export default function FavoriteGroup({ offers, city }: Props) {
+export default function FavoriteGroup({ offers, city }: Props): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -18,7 +19,7 @@ export default function FavoriteGroup({ offers, city }: Props) {
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((offer) => (<Card key={offer.id} offer={offer} cardType='favorites' />
+        {offers.map((offer) => (<OfferCard key={offer.id} offer={offer} cardType='favorites' />
         ))}
       </div>
     </li>

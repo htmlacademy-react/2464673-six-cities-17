@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+
 import { LoginStatus, RoutePath } from '../../const';
 
 type ProtectRouteProps = {

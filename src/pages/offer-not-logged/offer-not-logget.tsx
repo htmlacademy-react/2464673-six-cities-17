@@ -1,5 +1,7 @@
-import Header from '../../components/header/header';
 import { Link } from 'react-router-dom';
+
+import Header from '../../components/header/header';
+
 
 export default function OfferNotLogged(): JSX.Element {
   return (

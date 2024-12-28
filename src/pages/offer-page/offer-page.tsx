@@ -1,13 +1,19 @@
 import Header from '../../components/header/header';
-import Card from '../../components/card/card';
-import { OfferType } from '../../types';
+import OfferCardList from '../../components/offer-card-list/offer-card-list';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import Map from '../../components/map/map';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
+import { OfferType, ReviewsType } from '../../types';
 
 type Props = {
-  offers: OfferType[];
+  offersData: OfferType[];
+  activeCityName: string;
+  activeOfferId: string | null;
+  reviews: ReviewsType[];
 }
 
-export default function OfferPage({ offers }: Props): JSX.Element {
+export default function OfferPage({ reviews, activeCityName, activeOfferId, offersData }: Props): JSX.Element {
+  const reviewSlice: ReviewsType[] = reviews.slice(0, 10);
   return (
     <div className="page">
       <Header />
@@ -131,44 +137,20 @@ export default function OfferPage({ offers }: Props): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width={54} height={54} alt="Reviews avatar" />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
-                <AddCommentForm/>
+                <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList reviewSlice={reviewSlice} />
+                <AddCommentForm />
               </section>
             </div>
           </div>
-          <section className="offer__map map" />
+          <section className="offer__map map">
+            <Map offersData={offersData} activeCityName={activeCityName} activeOfferId={activeOfferId} />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {offers.map((offer) => (<Card key={offer.id} offer={offer} cardType='cities' />
-              ))}
-            </div>
+            <OfferCardList offersData={offersData.slice(0, 3)} />
           </section>
         </div>
       </main>

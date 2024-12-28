@@ -1,14 +1,14 @@
-import { OfferType, CardType } from '../../types';
 import { Link } from 'react-router-dom';
-import { RoutePath } from '../../const';
+
+import { OfferType, CardType } from '../../types';
 
 type Props = {
   offer: OfferType;
   cardType: CardType;
-  onHandleActiveOfferChange?: (id: string | undefined) => void;
+  onHandleActiveOfferChange?: (id: string | null) => void;
 }
 
-export default function Card({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
+export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
   const {rating, previewImage, price, isPremium, title, type} = offer;
   const placeRating = rating || 0;
 
@@ -16,7 +16,7 @@ export default function Card({offer, cardType, onHandleActiveOfferChange}: Props
     <article
       className={`${cardType}__card place-card`}
       onMouseEnter={() => onHandleActiveOfferChange && onHandleActiveOfferChange(offer.id)}
-      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(undefined)}
+      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(null)}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -24,7 +24,7 @@ export default function Card({offer, cardType, onHandleActiveOfferChange}: Props
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={RoutePath.Offer}>
+        <Link to={`/offer/${offer.id}`}>
           <img
             className="place-card__image"
             src={previewImage}

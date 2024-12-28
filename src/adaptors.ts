@@ -2,7 +2,7 @@ import { CityName, OfferType } from './types';
 
 type OfferGroups = Record<CityName, OfferType[]>;
 
-export function getOfferGroupes(offers: OfferType[]) {
+export function getOfferGroups(offers: OfferType[]) {
 
   const result: OfferGroups = {};
 

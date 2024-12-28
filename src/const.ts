@@ -1,9 +1,5 @@
 import { LocationType } from './types';
 
-export const CardQuantity = {
-  AllPlaces: 312,
-} as const;
-
 export enum RoutePath {
   Main = '/',
   Login = '/login',
@@ -18,7 +14,7 @@ export enum LoginStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const Marcers = {
+export const ItemPin = {
   DEFAULT: 'img/pin.svg',
   ACTIVE: 'img/pin-active.svg'
 } as const;
