@@ -6,16 +6,14 @@ import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import { OfferType, ReviewsType } from '../../types';
 
 type Props = {
-  filteredOffers: OfferType[];
-  offers: OfferType[];
+  offersData: OfferType[];
   activeCityName: string;
   activeOfferId: string | null;
   reviews: ReviewsType[];
 }
 
-export default function OfferPage({ reviews, offers, activeCityName, activeOfferId, filteredOffers }: Props): JSX.Element {
+export default function OfferPage({ reviews, activeCityName, activeOfferId, offersData }: Props): JSX.Element {
   const reviewSlice: ReviewsType[] = reviews.slice(0, 10);
-  const offerSlice: OfferType[] = offers.slice(0, 4);
   return (
     <div className="page">
       <Header />
@@ -146,13 +144,13 @@ export default function OfferPage({ reviews, offers, activeCityName, activeOffer
             </div>
           </div>
           <section className="offer__map map">
-            <Map offers={offerSlice} activeCityName={activeCityName} activeOfferId={activeOfferId} />
+            <Map offersData={offersData} activeCityName={activeCityName} activeOfferId={activeOfferId} />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferCardList filteredOffers={filteredOffers.slice(0, 3)} />
+            <OfferCardList offersData={offersData.slice(0, 3)} />
           </section>
         </div>
       </main>

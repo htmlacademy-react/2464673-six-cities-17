@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import {Icon, Marker, LayerGroup, layerGroup} from 'leaflet';
+import {Icon, Marker, layerGroup} from 'leaflet';
 
 import useMap from '../hooks/useMap';
 import { OfferType, LocationType } from '../../types';
@@ -7,7 +7,7 @@ import { ItemPin, Locations } from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-  offers: OfferType[];
+  offersData: OfferType[];
   activeOfferId: string | null;
   activeCityName: string;
 };
@@ -25,23 +25,15 @@ const currentCustomIcon = new Icon({
 });
 
 export default function Map(props: MapProps): JSX.Element {
-  const {offers, activeCityName, activeOfferId} = props;
+  const {offersData, activeCityName, activeOfferId} = props;
   const cityWithLocation: LocationType = Locations[activeCityName];
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityWithLocation);
-  const markerLayer = useRef<LayerGroup>(layerGroup());
-
-  useEffect(() => {
-    if(map) {
-      map.setView([cityWithLocation.latitude, cityWithLocation.longitude], cityWithLocation.zoom);
-      markerLayer.current.addTo(map);
-      // markerLayer.current.clearLayers();
-    }
-  }, [cityWithLocation, map]);
 
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      const markerLayer = layerGroup().addTo(map);
+      offersData.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
@@ -53,14 +45,16 @@ export default function Map(props: MapProps): JSX.Element {
               ? currentCustomIcon
               : defaultCustomIcon
           )
-          .addTo(markerLayer.current);
+          .addTo(markerLayer);
       });
 
-      // return () => {
-      //   map.removeLayer(markerLayer.current);
-      // };
+      map.setView([cityWithLocation.latitude, cityWithLocation.longitude], cityWithLocation.zoom);
+
+      return () => {
+        map.removeLayer(markerLayer);
+      };
     }
-  }, [map, offers, activeOfferId]);
+  }, [map, offersData, activeOfferId, cityWithLocation]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }

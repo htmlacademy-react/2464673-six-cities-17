@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 import { OfferType, CardType } from '../../types';
-import { RoutePath } from '../../const';
 
 type Props = {
   offer: OfferType;
@@ -25,7 +24,7 @@ export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: 
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={RoutePath.Offer}>
+        <Link to={`/offer/${offer.id}`}>
           <img
             className="place-card__image"
             src={previewImage}

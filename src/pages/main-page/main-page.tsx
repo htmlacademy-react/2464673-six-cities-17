@@ -6,16 +6,15 @@ import Cities from '../../components/cities/cities';
 
 
 type Props = {
-  offers: OfferType[];
   activeCityName: string;
   onHandleCityClick: (city: string) => void;
   offersCount: number;
-  filteredOffers: OfferType[];
+  offersData: OfferType[];
   activeOfferId: string | null;
   onHandleActiveOfferChange: (id: string | null) => void;
 }
 
-export default function MainPage({ activeOfferId, filteredOffers, offersCount, offers, activeCityName, onHandleActiveOfferChange, onHandleCityClick }: Props): JSX.Element {
+export default function MainPage({ activeOfferId, offersData, offersCount, activeCityName, onHandleActiveOfferChange, onHandleCityClick }: Props): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -47,11 +46,11 @@ export default function MainPage({ activeOfferId, filteredOffers, offersCount, o
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferCardList filteredOffers={filteredOffers} onHandleActiveOfferChange={onHandleActiveOfferChange} />
+              <OfferCardList offersData={offersData} onHandleActiveOfferChange={onHandleActiveOfferChange} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} activeCityName={activeCityName} activeOfferId={activeOfferId} />
+                <Map offersData={offersData} activeCityName={activeCityName} activeOfferId={activeOfferId} />
               </section>
             </div>
           </div>

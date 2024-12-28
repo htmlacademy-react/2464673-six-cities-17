@@ -16,6 +16,7 @@ type Props = {
 }
 
 export default function App({ offers, reviews }: Props): JSX.Element {
+
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   const handleActiveOfferChange = (id: string | null) => setActiveOfferId(id);
@@ -25,11 +26,22 @@ export default function App({ offers, reviews }: Props): JSX.Element {
   const handleCityClick = (city: string) => {
     setActiveCity(city);
   };
-  const filteredOffers: OfferType[] = offers.filter((offer) => offer.city.name === activeCityName);
-  const offersCount: number = filteredOffers.length;
+  const offersData: OfferType[] = offers.filter((offer) => offer.city.name === activeCityName);
+  const offersCount: number = offersData.length;
   return (
     <Routes>
-      <Route path={RoutePath.Main} element={<MainPage activeCityName={activeCityName} activeOfferId={activeOfferId} onHandleActiveOfferChange={handleActiveOfferChange} filteredOffers={filteredOffers} offersCount={offersCount} onHandleCityClick={handleCityClick} offers={offers} />} />
+      <Route path={RoutePath.Main}
+        element={
+          <MainPage
+            activeCityName={activeCityName}
+            activeOfferId={activeOfferId}
+            onHandleActiveOfferChange={handleActiveOfferChange}
+            offersData={offersData}
+            offersCount={offersCount}
+            onHandleCityClick={handleCityClick}
+          />
+        }
+      />
       <Route path={RoutePath.Login} element={<LoginPage />} />
       <Route
         path={RoutePath.Favorites}
@@ -39,7 +51,16 @@ export default function App({ offers, reviews }: Props): JSX.Element {
           </ProtectRoute>
         }
       />
-      <Route path={RoutePath.Offer} element={<OfferPage activeCityName={activeCityName} offers={offers} activeOfferId={activeOfferId} filteredOffers={filteredOffers} reviews={reviews}/>} />
+      <Route path={RoutePath.Offer}
+        element={
+          <OfferPage
+            activeCityName={activeCityName}
+            activeOfferId={activeOfferId}
+            offersData={offersData}
+            reviews={reviews}
+          />
+        }
+      />
       <Route path={RoutePath.NOT_FAUND} element={<NotFound />} />
     </Routes>
   );
