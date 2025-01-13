@@ -9,6 +9,7 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
 import ProtectRoute from '../../pages/protect-route/protect-route';
 import { OfferType, ReviewsType } from '../../types';
+import { useAppSelector } from '../../components/store/storeHooks';
 
 type Props = {
   offers: OfferType[];
@@ -26,6 +27,10 @@ export default function App({ offers, reviews }: Props): JSX.Element {
   const handleCityClick = (city: string) => {
     setActiveCity(city);
   };
+
+  const cityId = useAppSelector((state) => state.currentCity);
+  const storeffers = useAppSelector((state) => state.offerCards);
+
   const offersData: OfferType[] = offers.filter((offer) => offer.city.name === activeCityName);
   const offersCount: number = offersData.length;
   return (
@@ -47,7 +52,7 @@ export default function App({ offers, reviews }: Props): JSX.Element {
         path={RoutePath.Favorites}
         element={
           <ProtectRoute loginStatus={LoginStatus.Auth}>
-            <FavoritePage offers={offers} />
+            <FavoritePage/>
           </ProtectRoute>
         }
       />

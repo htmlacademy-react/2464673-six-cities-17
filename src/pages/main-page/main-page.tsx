@@ -3,6 +3,7 @@ import Header from '../../components/header/header';
 import { OfferType } from '../../types';
 import Map from '../../components/map/map';
 import Cities from '../../components/cities/cities';
+// import { useAppSelector } from '../../components/store/storeHooks';
 
 
 type Props = {

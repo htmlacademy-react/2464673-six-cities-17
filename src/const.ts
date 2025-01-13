@@ -28,7 +28,7 @@ export enum Cities {
   DUSSELDORF = 'Dusseldorf',
 }
 
-export const CitiesArry = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const CitiesArray = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const Locations: Record<string, LocationType> = {
   'Paris': {
