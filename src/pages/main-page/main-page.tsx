@@ -7,14 +7,13 @@ import Cities from '../../components/cities/cities';
 
 type Props = {
   activeCityName: string;
-  onHandleCityClick: (city: string) => void;
   offersCount: number;
   offersData: OfferType[];
   activeOfferId: string | null;
   onHandleActiveOfferChange: (id: string | null) => void;
 }
 
-export default function MainPage({ activeOfferId, offersData, offersCount, activeCityName, onHandleActiveOfferChange, onHandleCityClick }: Props): JSX.Element {
+export default function MainPage({ activeOfferId, offersData, offersCount, activeCityName, onHandleActiveOfferChange}: Props): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -23,7 +22,7 @@ export default function MainPage({ activeOfferId, offersData, offersCount, activ
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Cities onHandleCityClick={onHandleCityClick} activeCityName={activeCityName}/>
+            <Cities activeCityName={activeCityName}/>
           </section>
         </div>
         <div className="cities">

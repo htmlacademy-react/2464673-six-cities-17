@@ -3,12 +3,11 @@ import Footer from '../../components/footer/footer';
 import FavoriteGroup from '../../components/favorite-group/favorite-group';
 import { OfferType } from '../../types';
 import { getOfferGroups } from '../../adaptors';
+import { useAppSelector } from '../../components/store/storeHooks';
 
-type Props = {
-  offers: OfferType[];
-}
 
-export default function FavoritePage({ offers }: Props): JSX.Element {
+export default function FavoritePage(): JSX.Element {
+  const offers = useAppSelector((state) => state.offerCards);
   const offerGroups = getOfferGroups(offers);
 
   return (

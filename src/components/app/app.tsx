@@ -1,4 +1,4 @@
-import { RoutePath, LoginStatus, DEFAULT_CITY } from '../../const';
+import { RoutePath, LoginStatus } from '../../const';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -9,24 +9,23 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
 import ProtectRoute from '../../pages/protect-route/protect-route';
 import { OfferType, ReviewsType } from '../../types';
+import { useAppSelector } from '../../components/store/storeHooks';
+
 
 type Props = {
-  offers: OfferType[];
   reviews: ReviewsType[];
 }
 
-export default function App({ offers, reviews }: Props): JSX.Element {
+export default function App({ reviews }: Props): JSX.Element {
 
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   const handleActiveOfferChange = (id: string | null) => setActiveOfferId(id);
 
-  const [activeCityName, setActiveCity] = useState<string>(DEFAULT_CITY);
+  const activeCityName = useAppSelector((state) => state.currentCity);
+  const storeOffers = useAppSelector((state) => state.offerCards);
 
-  const handleCityClick = (city: string) => {
-    setActiveCity(city);
-  };
-  const offersData: OfferType[] = offers.filter((offer) => offer.city.name === activeCityName);
+  const offersData: OfferType[] = storeOffers.filter((offer) => offer.city.name === activeCityName);
   const offersCount: number = offersData.length;
   return (
     <Routes>
@@ -38,7 +37,6 @@ export default function App({ offers, reviews }: Props): JSX.Element {
             onHandleActiveOfferChange={handleActiveOfferChange}
             offersData={offersData}
             offersCount={offersCount}
-            onHandleCityClick={handleCityClick}
           />
         }
       />
@@ -47,7 +45,7 @@ export default function App({ offers, reviews }: Props): JSX.Element {
         path={RoutePath.Favorites}
         element={
           <ProtectRoute loginStatus={LoginStatus.Auth}>
-            <FavoritePage offers={offers} />
+            <FavoritePage/>
           </ProtectRoute>
         }
       />
