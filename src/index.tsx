@@ -18,7 +18,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App offers={Offers} reviews={ReviewsMocks} />
+        <App reviews={ReviewsMocks} />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

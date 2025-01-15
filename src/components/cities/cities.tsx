@@ -1,14 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { CitiesArray } from '../../const';
+import { useAppDispatch } from '../store/storeHooks';
+import { useEffect } from 'react';
+import { changeCity } from '../store/action';
 
 type Props = {
   activeCityName: string;
-  onHandleCityClick: (city: string) => void;
 };
 
-export default function Cities({ activeCityName, onHandleCityClick }: Props): JSX.Element {
+export default function Cities({ activeCityName }: Props): JSX.Element {
+  const [searchParam, setSearchParam] = useSearchParams();
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(changeCity(searchParam.get('city') || CitiesArray[0]));
+  }, [searchParam, dispatch]);
+
+  const onHandleCityClick = (city: string) => {
+    setSearchParam({ city });
+  };
   return (
     <ul className="locations__list tabs__list">
       {CitiesArray.map((cityName) => (
