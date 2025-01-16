@@ -4,6 +4,8 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import { OfferType, ReviewsType } from '../../types';
+import { useAppSelector } from '../../components/store/storeHooks';
+import { sortOffers } from '../../helpers';
 
 type Props = {
   offersData: OfferType[];
@@ -14,6 +16,8 @@ type Props = {
 
 export default function OfferPage({ reviews, activeCityName, activeOfferId, offersData }: Props): JSX.Element {
   const reviewSlice: ReviewsType[] = reviews.slice(0, 10);
+  const currentSort = useAppSelector((state) => state.currentSort);
+  const sortedOfferCards = sortOffers(offersData, currentSort);
   return (
     <div className="page">
       <Header />
@@ -150,7 +154,7 @@ export default function OfferPage({ reviews, activeCityName, activeOfferId, offe
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferCardList offersData={offersData.slice(0, 3)} />
+            <OfferCardList sortedOfferCards={sortedOfferCards.slice(0, 3)} />
           </section>
         </div>
       </main>
