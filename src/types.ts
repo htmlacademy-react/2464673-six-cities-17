@@ -1,3 +1,4 @@
+import { SortItem } from './const';
 
 export type LocationType = {
   latitude: number;
@@ -43,3 +44,13 @@ export type ReviewsType = {
   rating: number;
 }
 
+export type SortItemNamesType = {
+  Popular: string;
+  PriceLowHigh: string;
+  PriceHighLow: string;
+  TopRated: string;
+  }
+
+export type SortItemKey = keyof typeof SortItem;
+
+export type SortItemName = typeof SortItem[SortItemKey];

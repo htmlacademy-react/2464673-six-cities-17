@@ -1,4 +1,5 @@
 import { LocationType } from './types';
+import { SortItemNamesType } from './types';
 
 export enum RoutePath {
   Main = '/',
@@ -64,3 +65,9 @@ export const Locations: Record<string, LocationType> = {
   }
 };
 
+export const SortItem: SortItemNamesType = {
+  Popular: 'Popular',
+  PriceLowHigh: 'Price: low to high',
+  PriceHighLow: 'Price: high to low',
+  TopRated: 'Top rated first',
+} as const;
