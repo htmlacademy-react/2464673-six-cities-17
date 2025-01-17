@@ -6,6 +6,7 @@ import Map from '../../components/map/map';
 import Cities from '../../components/cities/cities';
 import SortList from '../../components/sort-list/sort-list';
 import { sortOffers } from '../../helpers';
+import MainEmpty from '../main-empty/main-empty';
 
 type Props = {
   activeCityName: string;
@@ -19,10 +20,15 @@ export default function MainPage({ activeOfferId, offersData, offersCount, activ
   const currentSort = useAppSelector((state) => state.currentSort);
   const sortedOfferCards = sortOffers(offersData, currentSort);
 
+  if(offersCount === 0) {
+    return (
+      <MainEmpty activeCityName={activeCityName}/>
+    );
+  }
   return (
     <div className="page page--gray page--main">
       <Header />
-      <main className={`page__main page__main--index${offersCount > 0 ? '' : ' page_main--index-empty'}`}>
+      <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
