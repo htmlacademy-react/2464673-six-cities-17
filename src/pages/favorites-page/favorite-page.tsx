@@ -8,7 +8,7 @@ import { useAppSelector } from '../../store/storeHooks';
 
 export default function FavoritePage(): JSX.Element {
   const offers = useAppSelector((state) => state.offerCards);
-  const offerGroups = getOfferGroups(offers);
+  const offerGroups = getOfferGroups(offers.offer);
 
   return (
     <div className="page">

@@ -9,11 +9,11 @@ export enum RoutePath {
   NOT_FAUND = '*',
 }
 
-export const LoginStatus = {
-  Auth: 'AUTH',
-  NotAuth: 'NOT_AUTH',
-  Unknown: 'UNKNOWN',
-} as const;
+export enum LoginStatus {
+  Auth = 'AUTH',
+  NotAuth = 'NOT_AUTH',
+  Unknown = 'UNKNOWN',
+}
 
 export const ItemPin = {
   DEFAULT: 'img/pin.svg',
