@@ -9,7 +9,7 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
 import ProtectRoute from '../../pages/protect-route/protect-route';
 import { OfferType, ReviewsType } from '../../types';
-import { useAppSelector } from '../../components/store/storeHooks';
+import { useAppSelector } from '../../store/storeHooks';
 
 
 type Props = {
@@ -23,7 +23,7 @@ export default function App({ reviews }: Props): JSX.Element {
   const handleActiveOfferChange = (id: string | null) => setActiveOfferId(id);
 
   const activeCityName = useAppSelector((state) => state.currentCity);
-  const storeOffers = useAppSelector((state) => state.offerCards);
+  const storeOffers = useAppSelector((state) => state.offerCards.offer);
 
   const offersData: OfferType[] = storeOffers.filter((offer) => offer.city.name === activeCityName);
   const offersCount: number = offersData.length;

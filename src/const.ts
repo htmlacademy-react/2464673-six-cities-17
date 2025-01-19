@@ -9,11 +9,11 @@ export enum RoutePath {
   NOT_FAUND = '*',
 }
 
-export enum LoginStatus {
-  Auth = 'AUTH',
-  NotAuth = 'NOT_AUTH',
-  Unknown = 'UNKNOWN',
-}
+export const LoginStatus = {
+  Auth: 'AUTH',
+  NotAuth: 'NOT_AUTH',
+  Unknown: 'UNKNOWN',
+} as const;
 
 export const ItemPin = {
   DEFAULT: 'img/pin.svg',
@@ -71,3 +71,10 @@ export const SortItem: SortItemNamesType = {
   PriceHighLow: 'Price: high to low',
   TopRated: 'Top rated first',
 } as const;
+
+export enum APIRoutes {
+  Offers = '/offers',
+  Favorites = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+}

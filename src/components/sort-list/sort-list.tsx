@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/storeHooks';
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
 
 import { SortItem } from '../../const';
-import { changeSorting } from '../store/action';
+import { changeSorting } from '../../store/action';
 
 
 export default function SortList(): JSX.Element {

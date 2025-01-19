@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../components/store/storeHooks';
+import { useAppSelector } from '../../store/storeHooks';
 import OfferCardList from '../../components/offer-card-list/offer-card-list';
 import Header from '../../components/header/header';
 import { OfferType } from '../../types';

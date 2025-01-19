@@ -1,9 +1,9 @@
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { CitiesArray } from '../../const';
-import { useAppDispatch } from '../store/storeHooks';
+import { useAppDispatch } from '../../store/storeHooks';
 import { useEffect } from 'react';
-import { changeCity } from '../store/action';
+import { changeCity } from '../../store/action';
 
 type Props = {
   activeCityName: string;

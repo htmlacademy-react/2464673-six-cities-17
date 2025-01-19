@@ -3,7 +3,7 @@ import Footer from '../../components/footer/footer';
 import FavoriteGroup from '../../components/favorite-group/favorite-group';
 import { OfferType } from '../../types';
 import { getOfferGroups } from '../../adaptors';
-import { useAppSelector } from '../../components/store/storeHooks';
+import { useAppSelector } from '../../store/storeHooks';
 
 
 export default function FavoritePage(): JSX.Element {
