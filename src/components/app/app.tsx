@@ -1,6 +1,6 @@
 import { RoutePath, LoginStatus } from '../../const';
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import MainPage from '../../pages/main-page/main-page';
 import FavoritePage from '../../pages/favorites-page/favorite-page';
@@ -9,7 +9,8 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
 import ProtectRoute from '../../pages/protect-route/protect-route';
 import { OfferType, ReviewsType } from '../../types';
-import { useAppSelector } from '../../store/storeHooks';
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
+import { fetchOffers } from '../../store/api-action';
 
 
 type Props = {
@@ -17,6 +18,11 @@ type Props = {
 }
 
 export default function App({ reviews }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
 
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
@@ -45,7 +51,7 @@ export default function App({ reviews }: Props): JSX.Element {
         path={RoutePath.Favorites}
         element={
           <ProtectRoute loginStatus={LoginStatus.Auth}>
-            <FavoritePage/>
+            <FavoritePage />
           </ProtectRoute>
         }
       />
