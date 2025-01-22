@@ -1,4 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
+import clsx from 'clsx';
 
 import { CitiesArray } from '../../const';
 import { useAppDispatch } from '../../store/storeHooks';
@@ -25,7 +26,8 @@ export default function Cities({ activeCityName }: Props): JSX.Element {
       {CitiesArray.map((cityName) => (
         <li key={cityName} className="locations__item">
           <Link
-            className={`locations__item-link tabs__item ${cityName === activeCityName ? 'tabs__item--active' : ''}`}
+            className={clsx('locations__item-link', 'tabs__item', cityName === activeCityName && 'tabs__item--active')}
+            // className={`locations__item-link tabs__item ${cityName === activeCityName ? 'tabs__item--active' : ''}`}
             to="#"
             onClick={(e) => {
               e.preventDefault();
