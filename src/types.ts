@@ -54,3 +54,4 @@ export type SortItemNamesType = {
 export type SortItemKey = keyof typeof SortItem;
 
 export type SortItemName = typeof SortItem[SortItemKey];
+

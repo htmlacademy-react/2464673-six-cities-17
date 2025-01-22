@@ -4,7 +4,7 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import { OfferType, ReviewsType } from '../../types';
-import { useAppSelector } from '../../components/store/storeHooks';
+import { useAppSelector } from '../../store/storeHooks';
 import { sortOffers } from '../../helpers';
 
 type Props = {

@@ -1,4 +1,5 @@
 import OfferCard from '../offer-card/offer-card';
+// import Spinner from '../spinner/spinner';
 import { OfferType } from '../../types';
 
 type Props = {
@@ -11,6 +12,8 @@ export default function OfferCardList({ sortedOfferCards, onHandleActiveOfferCha
     <div className="cities__places-list places__list tabs__content">
       {sortedOfferCards.map((offer) => (<OfferCard onHandleActiveOfferChange={onHandleActiveOfferChange} key={offer.id} offer={offer} cardType='cities' />
       ))}
+      {/* {!isLoading ? (sortedOfferCards.map((offer) => (<OfferCard onHandleActiveOfferChange={onHandleActiveOfferChange} key={offer.id} offer={offer} cardType='cities' />
+      ))) : ( <Spinner />) } */}
     </div>
   );
 }

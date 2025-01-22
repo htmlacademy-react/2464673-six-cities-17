@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/storeHooks';
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
+import clsx from 'clsx';
 
 import { SortItem } from '../../const';
-import { changeSorting } from '../store/action';
+import { changeSorting } from '../../store/action';
 
 
 export default function SortList(): JSX.Element {
@@ -38,11 +39,11 @@ export default function SortList(): JSX.Element {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom${isMenuOpened ? ' places__options--opened' : ''}`}>
+      <ul className={clsx('places__options', 'places__options--custom', isMenuOpened && 'places__options--opened')}>
         {Object.values(SortItem).map((sortOptionNames) => (
           <li
             key={sortOptionNames}
-            className={`places__options${sortOptionNames === currentSort ? ' places__option--active' : ''}`}
+            className={clsx('places__options', sortOptionNames === currentSort && 'places__option--active')}
             tabIndex={0}
             onClick={() => dispatch(changeSorting(sortOptionNames))}
           >

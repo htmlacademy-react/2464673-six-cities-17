@@ -71,3 +71,10 @@ export const SortItem: SortItemNamesType = {
   PriceHighLow: 'Price: high to low',
   TopRated: 'Top rated first',
 } as const;
+
+export enum APIRoutes {
+  Offers = '/offers',
+  Favorites = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+}
