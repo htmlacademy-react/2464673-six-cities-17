@@ -27,7 +27,6 @@ export default function Cities({ activeCityName }: Props): JSX.Element {
         <li key={cityName} className="locations__item">
           <Link
             className={clsx('locations__item-link', 'tabs__item', cityName === activeCityName && 'tabs__item--active')}
-            // className={`locations__item-link tabs__item ${cityName === activeCityName ? 'tabs__item--active' : ''}`}
             to="#"
             onClick={(e) => {
               e.preventDefault();
