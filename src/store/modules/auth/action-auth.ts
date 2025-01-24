@@ -8,4 +8,4 @@ createAction<LoginStatus>('user/changeAuthorizationStatus');
 export const setLoggedUserInfo =
 createAction<UserType | null>('user/setLoggedUserInfo');
 
-export const setIsAuthError = createAction<boolean>('user/setIsAuthError')
+export const setIsAuthError = createAction<boolean>('user/setIsAuthError');

@@ -9,7 +9,7 @@ import { getOffers } from '../../store/modules/cities/selectors-cities';
 
 export default function FavoritePage(): JSX.Element {
   const offers = useAppSelector(getOffers);
-  const offerGroups = getOfferGroups(offers.offer);
+  const offerGroups = getOfferGroups(offers);
 
   return (
     <div className="page">
