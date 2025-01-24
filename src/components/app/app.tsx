@@ -1,4 +1,4 @@
-import { RoutePath, LoginStatus } from '../../const';
+import { RoutePath } from '../../const';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -10,7 +10,11 @@ import NotFound from '../../pages/no-found/not-found';
 import ProtectRoute from '../../pages/protect-route/protect-route';
 import { OfferType, ReviewsType } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
-import { fetchOffers } from '../../store/api-action';
+import { fetchOffers } from '../../store/modules/cities/api-action-cities';
+import Spinner from '../spinner/spinner';
+import { checkAuthStatus } from '../../store/modules/auth/api-action-auth';
+import { getOffers, getOffersLoading, getCurrentCity } from '../../store/modules/cities/selectors-cities';
+import { getAuthStatus } from '../../store/modules/auth/selectors-auth';
 
 
 type Props = {
@@ -19,17 +23,22 @@ type Props = {
 
 export default function App({ reviews }: Props): JSX.Element {
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchOffers());
-  }, [dispatch]);
-
+  const authStatus = useAppSelector(getAuthStatus);
+  const isLoading = useAppSelector(getOffersLoading);
+  const activeCityName = useAppSelector(getCurrentCity);
+  const storeOffers = useAppSelector(getOffers);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   const handleActiveOfferChange = (id: string | null) => setActiveOfferId(id);
 
-  const activeCityName = useAppSelector((state) => state.currentCity);
-  const storeOffers = useAppSelector((state) => state.offerCards.offer);
+  useEffect(() => {
+    dispatch(fetchOffers());
+    dispatch(checkAuthStatus());
+  }, [dispatch]);
+
+  if(isLoading) {
+    return <Spinner/>;
+  }
 
   const offersData: OfferType[] = storeOffers.filter((offer) => offer.city.name === activeCityName);
   const offersCount: number = offersData.length;
@@ -50,8 +59,8 @@ export default function App({ reviews }: Props): JSX.Element {
       <Route
         path={RoutePath.Favorites}
         element={
-          <ProtectRoute loginStatus={LoginStatus.Auth}>
-            <FavoritePage />
+          <ProtectRoute loginStatus={authStatus}>
+            <FavoritePage loginStatus={authStatus} />
           </ProtectRoute>
         }
       />

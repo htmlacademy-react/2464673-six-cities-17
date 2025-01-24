@@ -4,10 +4,11 @@ import FavoriteGroup from '../../components/favorite-group/favorite-group';
 import { OfferType } from '../../types';
 import { getOfferGroups } from '../../adaptors';
 import { useAppSelector } from '../../store/storeHooks';
+import { getOffers } from '../../store/modules/cities/selectors-cities';
 
 
 export default function FavoritePage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offerCards);
+  const offers = useAppSelector(getOffers);
   const offerGroups = getOfferGroups(offers.offer);
 
   return (
