@@ -7,6 +7,7 @@ import Cities from '../../components/cities/cities';
 import SortList from '../../components/sort-list/sort-list';
 import { sortOffers } from '../../helpers';
 import MainEmpty from '../main-empty/main-empty';
+import { getCurrentSort } from '../../store/modules/cities/selectors-cities';
 
 type Props = {
   activeCityName: string;
@@ -17,7 +18,7 @@ type Props = {
 }
 
 export default function MainPage({ activeOfferId, offersData, offersCount, activeCityName, onHandleActiveOfferChange }: Props): JSX.Element {
-  const currentSort = useAppSelector((state) => state.currentSort);
+  const currentSort = useAppSelector(getCurrentSort);
   const sortedOfferCards = sortOffers(offersData, currentSort);
 
   if(offersCount === 0) {

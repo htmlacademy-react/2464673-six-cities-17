@@ -77,4 +77,12 @@ export enum APIRoutes {
   Favorites = '/favorite',
   Comments = '/comments',
   Login = '/login',
+  Logout = '/logout',
 }
+
+export const FeatureModule = {
+  CITIES: 'cities',
+  OFFER: 'offer',
+  FAVORITE: 'favorite',
+  AUTH: 'auth',
+} as const;

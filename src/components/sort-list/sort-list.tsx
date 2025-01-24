@@ -3,14 +3,15 @@ import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
 import clsx from 'clsx';
 
 import { SortItem } from '../../const';
-import { changeSorting } from '../../store/action';
+import { changeSorting } from '../../store/modules/cities/action-cities';
+import { getCurrentSort } from '../../store/modules/cities/selectors-cities';
 
 
 export default function SortList(): JSX.Element {
   const sortSpanRef = useRef<HTMLElement>(null);
   const [isMenuOpened, setMenuOpened] = useState(false);
   const dispatch = useAppDispatch();
-  const currentSort = useAppSelector((state) => state.currentSort);
+  const currentSort = useAppSelector(getCurrentSort);
 
   useEffect(() => {
     const hideSortList = (evt: MouseEvent) => {

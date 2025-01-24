@@ -34,6 +34,7 @@ export type UserType = {
     name: string;
     avatarUrl: string;
     isPro: boolean;
+    token: string;
 }
 
 export type ReviewsType = {
@@ -55,3 +56,7 @@ export type SortItemKey = keyof typeof SortItem;
 
 export type SortItemName = typeof SortItem[SortItemKey];
 
+export type AuthData = {
+  email: string;
+  password: string;
+};

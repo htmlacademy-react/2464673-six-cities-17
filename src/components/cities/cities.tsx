@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { CitiesArray } from '../../const';
 import { useAppDispatch } from '../../store/storeHooks';
 import { useEffect } from 'react';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/modules/cities/action-cities';
 
 type Props = {
   activeCityName: string;

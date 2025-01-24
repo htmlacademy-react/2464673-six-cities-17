@@ -6,6 +6,7 @@ import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import { OfferType, ReviewsType } from '../../types';
 import { useAppSelector } from '../../store/storeHooks';
 import { sortOffers } from '../../helpers';
+import { getCurrentSort } from '../../store/modules/cities/selectors-cities';
 
 type Props = {
   offersData: OfferType[];
@@ -16,7 +17,7 @@ type Props = {
 
 export default function OfferPage({ reviews, activeCityName, activeOfferId, offersData }: Props): JSX.Element {
   const reviewSlice: ReviewsType[] = reviews.slice(0, 10);
-  const currentSort = useAppSelector((state) => state.currentSort);
+  const currentSort = useAppSelector(getCurrentSort);
   const sortedOfferCards = sortOffers(offersData, currentSort);
   return (
     <div className="page">
