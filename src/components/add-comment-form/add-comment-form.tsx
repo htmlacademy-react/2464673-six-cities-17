@@ -7,29 +7,6 @@ import commentsApiService from '../../service/comments-api-service';
 import Rating from '../rating/rating';
 import { RATING_MAX, RATING_MIN, REVIEW_LENGTH_MAX, REVIEW_LENGTH_MIN } from '../../const';
 
-const RATING_STARS = [
-  {
-    value: 5,
-    title: 'perfect',
-  },
-  {
-    value: 4,
-    title: 'good',
-  },
-  {
-    value: 3,
-    title: 'not bad',
-  },
-  {
-    value: 2,
-    title: 'badly',
-  },
-  {
-    value: 1,
-    title: 'terribly',
-  },
-];
-
 export default function AddCommentForm() {
   const {id: id} = useParams();
   const dispatch = useAppDispatch();
