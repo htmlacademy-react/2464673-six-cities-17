@@ -6,7 +6,7 @@ export enum RoutePath {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
-  NOT_FAUND = '*',
+  NOT_FOUND = '*',
 }
 
 export enum LoginStatus {
@@ -86,3 +86,25 @@ export const FeatureModule = {
   FAVORITE: 'favorite',
   AUTH: 'auth',
 } as const;
+
+export const NEAR_PLACES_TO_SHOW = 3;
+export const REVIEW_MAX_COUNT = 10;
+export const RATING_MIN = 1;
+export const RATING_MAX = 5;
+export const REVIEW_LENGTH_MIN = 50;
+export const REVIEW_LENGTH_MAX = 300;
+
+export const OFFER_CATEGORIES: Record<string, string> = {
+  room: 'Room',
+  apartment: 'Apartment',
+  hotel: 'Hotel',
+  house: 'House',
+};
+
+export const RATING_TITLE: Record<string, string> = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect',
+};

@@ -1,4 +1,5 @@
-import { CityName, OfferType } from './types';
+import { OFFER_CATEGORIES, REVIEW_MAX_COUNT } from './const';
+import { CityName, OfferType, ReviewsType } from './types';
 
 type OfferGroups = Record<CityName, OfferType[]>;
 
@@ -16,4 +17,14 @@ export function getOfferGroups(offers: OfferType[]) {
     }
   });
   return result;
+}
+
+export function mapComments(comments: ReviewsType[]): ReviewsType[] {
+  return comments
+    .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, REVIEW_MAX_COUNT);
+}
+
+export function getOfferCategory(type: string): string {
+  return OFFER_CATEGORIES[type];
 }

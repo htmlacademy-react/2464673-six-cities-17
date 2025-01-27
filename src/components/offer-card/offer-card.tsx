@@ -5,7 +5,7 @@ import { OfferType, CardType } from '../../types';
 type Props = {
   offer: OfferType;
   cardType: CardType;
-  onHandleActiveOfferChange?: (id: string | null) => void;
+  onHandleActiveOfferChange?: (id: string | undefined) => void;
 }
 
 export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
@@ -16,7 +16,7 @@ export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: 
     <article
       className={`${cardType}__card place-card`}
       onMouseEnter={() => onHandleActiveOfferChange && onHandleActiveOfferChange(offer.id)}
-      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(null)}
+      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(undefined)}
     >
       {isPremium && (
         <div className="place-card__mark">

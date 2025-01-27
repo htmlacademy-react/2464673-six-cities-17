@@ -13,8 +13,8 @@ type Props = {
   activeCityName: string;
   offersCount: number;
   offersData: OfferType[];
-  activeOfferId: string | null;
-  onHandleActiveOfferChange: (id: string | null) => void;
+  activeOfferId: string | undefined;
+  onHandleActiveOfferChange: (id: string | undefined) => void;
 }
 
 export default function MainPage({ activeOfferId, offersData, offersCount, activeCityName, onHandleActiveOfferChange }: Props): JSX.Element {
@@ -46,7 +46,7 @@ export default function MainPage({ activeOfferId, offersData, offersCount, activ
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offersData={offersData} activeCityName={activeCityName} activeOfferId={activeOfferId} />
+                <Map offersData={offersData} activeCityName={activeCityName} offerId={activeOfferId} />
               </section>
             </div>
           </div>
