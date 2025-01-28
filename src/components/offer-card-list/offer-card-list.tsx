@@ -4,7 +4,7 @@ import { OfferType } from '../../types';
 
 type Props = {
   sortedOfferCards: OfferType[];
-  onHandleActiveOfferChange?: (id: string | null) => void;
+  onHandleActiveOfferChange?: (id: string | undefined) => void;
 };
 
 export default function OfferCardList({ sortedOfferCards, onHandleActiveOfferChange}: Props) {

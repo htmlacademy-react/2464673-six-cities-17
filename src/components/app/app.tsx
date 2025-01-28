@@ -1,4 +1,4 @@
-import { RoutePath } from '../../const';
+import { LoginStatus, RoutePath } from '../../const';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -8,7 +8,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFound from '../../pages/no-found/not-found';
 import ProtectRoute from '../../pages/protect-route/protect-route';
-import { OfferType, ReviewsType } from '../../types';
+import { OfferType } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
 import { fetchOffers } from '../../store/modules/cities/api-action-cities';
 import Spinner from '../spinner/spinner';
@@ -17,26 +17,22 @@ import { getOffers, getOffersLoading, getCurrentCity } from '../../store/modules
 import { getAuthStatus } from '../../store/modules/auth/selectors-auth';
 
 
-type Props = {
-  reviews: ReviewsType[];
-}
-
-export default function App({ reviews }: Props): JSX.Element {
+export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
   const isLoading = useAppSelector(getOffersLoading);
   const activeCityName = useAppSelector(getCurrentCity);
   const storeOffers = useAppSelector(getOffers);
-  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
 
-  const handleActiveOfferChange = (id: string | null) => setActiveOfferId(id);
+  const handleActiveOfferChange = (id: string | undefined) => setActiveOfferId(id);
 
   useEffect(() => {
     dispatch(fetchOffers());
     dispatch(checkAuthStatus());
   }, [dispatch]);
 
-  if(isLoading) {
+  if(isLoading || authStatus === LoginStatus.Unknown) {
     return <Spinner/>;
   }
 
@@ -60,21 +56,16 @@ export default function App({ reviews }: Props): JSX.Element {
         path={RoutePath.Favorites}
         element={
           <ProtectRoute loginStatus={authStatus}>
-            <FavoritePage loginStatus={authStatus} />
+            <FavoritePage />
           </ProtectRoute>
         }
       />
       <Route path={RoutePath.Offer}
         element={
-          <OfferPage
-            activeCityName={activeCityName}
-            activeOfferId={activeOfferId}
-            offersData={offersData}
-            reviews={reviews}
-          />
+          <OfferPage />
         }
       />
-      <Route path={RoutePath.NOT_FAUND} element={<NotFound />} />
+      <Route path={RoutePath.NOT_FOUND} element={<NotFound />} />
     </Routes>
   );
 }

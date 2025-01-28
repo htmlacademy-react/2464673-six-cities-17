@@ -24,6 +24,8 @@ export type OfferType = {
   previewImage: string;
 }
 
+export type PointType = Pick<OfferType, 'id' | 'location'>;
+
 export type CardType = 'favorites'|'cities';
 
 export type CityName = string;
@@ -37,6 +39,16 @@ export type UserType = {
     token: string;
 }
 
+export type OfferTypeFull = {
+  description: string;
+  images: string[];
+  goods: string[];
+  host: UserType;
+  bedrooms: number;
+  maxAdults: number;
+  previewImage: string;
+} & OfferType
+
 export type ReviewsType = {
   id: string;
   date: string;
@@ -44,6 +56,15 @@ export type ReviewsType = {
   comment: string;
   rating: number;
 }
+export type Comment = {
+  review: string;
+  rating: number;
+};
+
+export type CommentRequest = {
+  id: string;
+  comment: Comment;
+};
 
 export type SortItemNamesType = {
   Popular: string;
@@ -60,3 +81,9 @@ export type AuthData = {
   email: string;
   password: string;
 };
+
+export type CommentPayloadType = {
+  comment: string;
+  rating: number;
+}
+
