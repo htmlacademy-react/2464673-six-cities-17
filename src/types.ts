@@ -22,6 +22,7 @@ export type OfferCommonType = {
   isPremium: boolean;
   rating: RatingType;
 }
+
 export type OfferType = {
   previewImage: string;
 } & OfferCommonType
@@ -35,8 +36,6 @@ export type CityName = string;
 
 export type RatingType = number | null;
 
-
-
 export type OfferTypeFull = {
   description: string;
   images: string[];
@@ -46,11 +45,6 @@ export type OfferTypeFull = {
   maxAdults: number;
 } & OfferCommonType
 
-
-// export type CommentType = {
-//   review: string;
-//   rating: number;
-// };
 
 export type CommentRequest = {
   id: string;
