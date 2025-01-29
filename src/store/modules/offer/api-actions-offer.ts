@@ -1,66 +1,65 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { OfferTypeFull, OfferType, ReviewsType, CommentRequest, CommentPayloadType } from '../../../types';
+import { OfferTypeFull, OfferType, CommentPayloadType, CommentType } from '../../../types';
 import { store } from '../..';
 import { StateType } from '../../types';
 import { AxiosInstance } from 'axios';
 import { APIRoutes } from '../../../const';
-import { loadNearByOffer, loadOfferFull, loadReviews } from './actions-offer';
 
 export const getOfferInfoByID = createAsyncThunk<
-  void,
-  string,
+  OfferTypeFull,
+  { offerId: string },
   {
     dispatch: typeof store.dispatch;
     state: StateType;
     extra: AxiosInstance;
   }
 >('offer/getOfferInfo',
-  async (id, { dispatch, extra: api }) => {
-    const { data } = await api.get<OfferTypeFull>(`${APIRoutes.Offers}/${id}`);
-    dispatch(loadOfferFull(data));
+  async ({offerId}, {extra: api }) => {
+    const response = await api.get<OfferTypeFull>(`${APIRoutes.Offers}/${offerId}`);
+    return response?.data;
   }
 );
 
 export const fetchNearByOffers = createAsyncThunk<
-  void,
-  string,
+  OfferType[],
+  { offerId: string },
   {
     dispatch: typeof store.dispatch;
     state: StateType;
     extra: AxiosInstance;
   }
 >('offer/fetchNearByOffers',
-  async (id, { dispatch, extra: api }) => {
-    const { data } = await api.get<OfferType[]>(`${APIRoutes.Offers}/${id}/nearby`);
-    dispatch(loadNearByOffer(data));
+  async ({offerId}, { extra: api }) => {
+    const response = await api.get<OfferType[]>(`${APIRoutes.Offers}/${offerId}/nearby`);
+    return response?.data;
   }
 );
 
 export const fetchOfferComments = createAsyncThunk<
-  void,
-  string,
+  CommentType[],
+  { offerId: string },
   {
     dispatch: typeof store.dispatch;
     state: StateType;
     extra: AxiosInstance;
   }
 >('offer/fetchOfferComments',
-  async (id, { dispatch, extra: api }) => {
-    const { data } = await api.get<ReviewsType[]>(`${APIRoutes.Comments}/${id}`);
-    dispatch(loadReviews(data));
+  async ({offerId}, { extra: api }) => {
+    const response = await api.get<CommentType[]>(`${APIRoutes.Comments}/${offerId}`);
+    return response?.data;
   }
 );
 
 export const postOfferToComments = createAsyncThunk<
-  ReviewsType[],
-  CommentRequest,
+  CommentPayloadType,
+  {id: string; payload: CommentPayloadType},
   {
     dispatch: typeof store.dispatch;
     state: StateType;
     extra: AxiosInstance;
   }
 >('offer/postOfferToComments',
-  async ({ id, comment }, { extra: api }) => {
-    const { data } = await api.post<ReviewsType[]>(`${APIRoutes.Comments}/${id}`, { comment: comment.review, rating: +comment.rating });
-    return data;
+  async ({ id, payload }, { extra: api }) => {
+    const response = await api.post<CommentPayloadType>(`${APIRoutes.Comments}/${id}`, payload);
+    return response?.data;
   });

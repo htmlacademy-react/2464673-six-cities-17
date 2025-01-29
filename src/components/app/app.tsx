@@ -15,6 +15,7 @@ import Spinner from '../spinner/spinner';
 import { checkAuthStatus } from '../../store/modules/auth/api-action-auth';
 import { getOffers, getOffersLoading, getCurrentCity } from '../../store/modules/cities/selectors-cities';
 import { getAuthStatus } from '../../store/modules/auth/selectors-auth';
+import { loadFavoriteOfferCards } from '../../store/modules/favorite/api-action-favorite';
 
 
 export default function App(): JSX.Element {
@@ -31,6 +32,12 @@ export default function App(): JSX.Element {
     dispatch(fetchOffers());
     dispatch(checkAuthStatus());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (authStatus === LoginStatus.Auth) {
+      dispatch(loadFavoriteOfferCards());
+    }
+  }, [authStatus, dispatch]);
 
   if(isLoading || authStatus === LoginStatus.Unknown) {
     return <Spinner/>;

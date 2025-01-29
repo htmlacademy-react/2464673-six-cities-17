@@ -6,7 +6,7 @@ export enum RoutePath {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
-  NOT_FOUND = '*',
+  NOT_FOUND = '/*',
 }
 
 export enum LoginStatus {
@@ -108,3 +108,6 @@ export const RATING_TITLE: Record<string, string> = {
   4: 'good',
   5: 'perfect',
 };
+
+export const ERROR_ADD_COMMENT_MESSAGE = 'Ошибка при отправке комментария';
+export const ERROR_CHANGE_FAVORITE_MESSAGE = 'Ошибка при работе с избранным';

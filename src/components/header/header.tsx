@@ -1,11 +1,29 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { RoutePath } from '../../const';
+import { LoginStatus, RoutePath } from '../../const';
 import { logoutAction } from '../../store/modules/auth/api-action-auth';
-import { useAppDispatch } from '../../store/storeHooks';
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
+import { getAuthStatus, getUserData } from '../../store/modules/auth/selectors-auth';
+import { selectFavoriteOffers } from '../../store/modules/favorite/selectors';
+import { setFavoriteOffers } from '../../store/modules/favorite/slice-favorite';
+
 
 export default function Header(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authStatus = useAppSelector(getAuthStatus);
+  const isAuth = authStatus === LoginStatus.Auth;
+  const userData = useAppSelector(getUserData);
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
+
+  const handleSignOut = () => {
+    if (isAuth) {
+      dispatch(logoutAction());
+      dispatch(setFavoriteOffers([]));
+    } else {
+      navigate(RoutePath.Login);
+    }
+  };
   return (
     <header className="header">
       <div className="container">
@@ -17,27 +35,28 @@ export default function Header(): JSX.Element {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={RoutePath.Login}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  <span className="header__favorite-count">3</span>
-                </Link>
-              </li>
+              {
+                userData && (
+                  <li className="header__nav-item user">
+                    <Link className="header__nav-link header__nav-link--profile" to={RoutePath.Favorites}>
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                        <img src={userData.avatarUrl} alt='' />
+                      </div>
+                      <span className="header__user-name user__name">{userData.name}</span>
+                      <span className="header__favorite-count" >{favoriteOffers.length}</span>
+                    </Link>
+                  </li>
+                )
+              }
               <li className="header__nav-item">
-                <a className="header__nav-link" href='#' onClick={(evt) => {
-                  evt.preventDefault();
-                  dispatch(logoutAction());
-                }}
-                >
-                  <span className="header__signout">Sign out</span>
-                </a>
+                <button className="header__nav-link sign-out" onClick={handleSignOut}>
+                  <span className="header__signout">{isAuth ? 'Sign out' : 'Sign in'}</span>
+                </button>
               </li>
             </ul>
           </nav>
         </div>
       </div>
-    </header>
+    </header >
   );
 }

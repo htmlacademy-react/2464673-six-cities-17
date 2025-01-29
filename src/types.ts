@@ -11,7 +11,7 @@ export type CityType = {
 
 }
 
-export type OfferType = {
+export type OfferCommonType = {
   id: string;
   title: string;
   type: string;
@@ -21,8 +21,11 @@ export type OfferType = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: RatingType;
-  previewImage: string;
 }
+export type OfferType = {
+  previewImage: string;
+} & OfferCommonType
+
 
 export type PointType = Pick<OfferType, 'id' | 'location'>;
 
@@ -32,12 +35,7 @@ export type CityName = string;
 
 export type RatingType = number | null;
 
-export type UserType = {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-    token: string;
-}
+
 
 export type OfferTypeFull = {
   description: string;
@@ -46,20 +44,13 @@ export type OfferTypeFull = {
   host: UserType;
   bedrooms: number;
   maxAdults: number;
-  previewImage: string;
-} & OfferType
+} & OfferCommonType
 
-export type ReviewsType = {
-  id: string;
-  date: string;
-  user: UserType;
-  comment: string;
-  rating: number;
-}
-export type Comment = {
-  review: string;
-  rating: number;
-};
+
+// export type CommentType = {
+//   review: string;
+//   rating: number;
+// };
 
 export type CommentRequest = {
   id: string;
@@ -82,8 +73,28 @@ export type AuthData = {
   password: string;
 };
 
+export type ReviewsType = {
+  id: string;
+  date: string;
+  user: UserType;
+  comment: string;
+  rating: number;
+}
+
+export type UserType = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  token: string;
+}
+
 export type CommentPayloadType = {
   comment: string;
   rating: number;
 }
 
+export type CommentType = {
+  id: string;
+  date: string;
+  user: UserType;
+} & CommentPayloadType

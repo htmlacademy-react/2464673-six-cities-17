@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { OfferType, CardType } from '../../types';
+import { CardType, OfferType } from '../../types';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type Props = {
   offer: OfferType;
@@ -9,7 +10,7 @@ type Props = {
 }
 
 export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
-  const {rating, previewImage, price, isPremium, title, type} = offer;
+  const {rating, previewImage, price, isPremium, title, type, isFavorite} = offer;
   const placeRating = rating || 0;
 
   return (
@@ -40,12 +41,7 @@ export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: 
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton width='18' height='19' className="place-card" offerId={offer.id} isFavorite={isFavorite}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -2,10 +2,10 @@ import { FeatureModule } from '../../../const';
 import { StateType } from '../../types';
 
 export const getOffers = (state: StateType) =>
-  state[FeatureModule.CITIES].offerCards.offer;
+  state[FeatureModule.CITIES].offers;
 
 export const getOffersLoading = (state: StateType) =>
-  state[FeatureModule.CITIES].offerCards.isLoading;
+  state[FeatureModule.CITIES].isLoadingOffers;
 
 
 export const getCurrentCity = (state: StateType) =>

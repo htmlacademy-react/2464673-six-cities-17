@@ -8,9 +8,10 @@ import AddCommentForm from '../add-comment-form/add-comment-form';
 type Props = {
   reviewsFiltered: ReviewsType[];
   reviews: ReviewsType[];
+  onAddComment: () => void;
 }
 
-export default function ReviewsList({ reviewsFiltered, reviews }: Props): JSX.Element {
+export default function ReviewsList({ onAddComment, reviewsFiltered, reviews }: Props): JSX.Element {
   const authStatus = useAppSelector(getAuthStatus);
   return (
     <section className="offer__reviews reviews">
@@ -19,7 +20,7 @@ export default function ReviewsList({ reviewsFiltered, reviews }: Props): JSX.El
         {reviewsFiltered.map((review) => <Review key={review.id} review={review} />)}
       </ul>
       {
-        authStatus === LoginStatus.Auth && <AddCommentForm />
+        authStatus === LoginStatus.Auth && <AddCommentForm onAddComment={onAddComment}/>
       }
     </section>
   );
