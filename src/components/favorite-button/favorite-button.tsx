@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
 import { getAuthStatus } from '../../store/modules/auth/selectors-auth';
 import { useMemo } from 'react';
-import { APIRoutes, LoginStatus } from '../../const';
+import { LoginStatus, RoutePath } from '../../const';
 import { uploadFavoriteStatus } from '../../store/modules/favorite/api-action-favorite';
 
 type Props = {
@@ -19,23 +19,24 @@ export default function FavoriteButton({ width, height, isFavorite, className, o
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
   const isAuthorized = useMemo(() => authStatus === LoginStatus.Auth, [authStatus]);
+  const favoriteClass = isFavorite ? `${className}__bookmark-button--active` : '';
 
-  const active = isFavorite && isAuthorized ? `${className}__bookmark-button--active` : '';
-  const classNameTxt = `${className}__bookmark-button ${active} button`;
-  const button = (
+  const handleAddFavorite = () => {
+    if (isAuthorized) {
+      dispatch(uploadFavoriteStatus({
+        offerId,
+        status: isFavorite ? 0 : 1,
+      }));
+    } else {
+      navigate(RoutePath.Login);
+    }
+  };
+
+  return (
     <button
-      className={classNameTxt}
+      className={`${className}__bookmark-button button ${favoriteClass}`}
       type="button"
-      onClick={() => {
-        if (isAuthorized) {
-          dispatch(uploadFavoriteStatus({
-            offerId,
-            status: isFavorite ? 0 : 1,
-          }));
-        } else {
-          navigate(APIRoutes.Login);
-        }
-      }}
+      onClick={handleAddFavorite}
     >
       <svg
         className={`${className}__bookmark-icon`}
@@ -47,5 +48,4 @@ export default function FavoriteButton({ width, height, isFavorite, className, o
       <span className="visually-hidden">{isFavorite && isAuthorized ? 'In bookmarks' : 'To bookmarks'}</span>
     </button >
   );
-  return button;
 }
