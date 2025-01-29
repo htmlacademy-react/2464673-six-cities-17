@@ -1,14 +1,9 @@
-import { UserType } from '../../../types';
 import { FeatureModule, LoginStatus } from '../../../const';
 import { createSlice } from '@reduxjs/toolkit';
 import { changeAuthorizationStatus, setLoggedUserInfo } from './action-auth';
+import { AuthSliceType } from './type';
 
-type InitialStateType = {
-  authorizationStatus: LoginStatus;
-  user: UserType | null;
-}
-
-const initialState: InitialStateType = {
+const initialState: AuthSliceType = {
   authorizationStatus: LoginStatus.Unknown,
   user: null,
 };
