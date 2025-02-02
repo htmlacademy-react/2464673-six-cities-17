@@ -110,4 +110,3 @@ export const RATING_TITLE: Record<string, string> = {
 };
 
 export const ERROR_ADD_COMMENT_MESSAGE = 'Ошибка при отправке комментария';
-export const ERROR_CHANGE_FAVORITE_MESSAGE = 'Ошибка при работе с избранным';

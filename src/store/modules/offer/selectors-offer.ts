@@ -10,4 +10,5 @@ export const getNearPlaces = (state: StateType) => state[FeatureModule.OFFER].of
 export const getReviews = (state: StateType) => state[FeatureModule.OFFER].reviews;
 
 export const selectIsLoadingOfferComments = (state: StateType) => state[FeatureModule.OFFER].isLoadingOfferComments;
+
 export const selectIsLoadingOffersNearby = (state: StateType) => state[FeatureModule.OFFER].isLoadingOffersNearby;

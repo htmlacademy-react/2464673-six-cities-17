@@ -11,25 +11,28 @@ import { useEffect } from 'react';
 import { fetchNearByOffers, fetchOfferComments, getOfferInfoByID } from '../../store/modules/offer/api-actions-offer';
 import { getCurrentCity } from '../../store/modules/cities/selectors-cities';
 import Spinner from '../../components/spinner/spinner';
-import { getOfferCategory, mapComments } from '../../adaptors';
+import { getOfferCategory, isOfferFavorite, mapComments } from '../../adaptors';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
+import { OfferTypeFull } from '../../types';
+import { selectFavoriteOffers } from '../../store/modules/favorite/selectors';
 
-export default function OfferPage(): JSX.Element {
+export default function OfferPage() {
   const { id: offerId } = useParams();
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (offerId) {
-      dispatch(getOfferInfoByID({offerId}));
-      dispatch(fetchNearByOffers({offerId}));
-      dispatch(fetchOfferComments({offerId}));
+      dispatch(getOfferInfoByID({ offerId }));
+      dispatch(fetchNearByOffers({ offerId }));
+      dispatch(fetchOfferComments({ offerId }));
     }
   }, [offerId, dispatch]);
 
   const activeCityName = useAppSelector(getCurrentCity);
   const authStatus = useAppSelector(getAuthStatus);
   const isLoadingOffersFull = useAppSelector(getOfferLoadingFull);
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
 
   const offer = useAppSelector(getOfferFull);
 
@@ -57,7 +60,13 @@ export default function OfferPage(): JSX.Element {
   if (!offer || !reviews) {
     return null;
   }
-  const ratingStars = Math.round(offer.rating === null ? 0 : offer.rating / 5 * 100);
+  const offerWithFavorite: OfferTypeFull = {
+    ...offer,
+    isFavorite: isOfferFavorite(favoriteOffers, offer.id),
+  };
+
+  const ratingStars = Math.round(offer?.rating === null ? 0 : offer.rating / 5 * 100);
+
   return (
     <div className="page">
       <Header />
@@ -85,7 +94,7 @@ export default function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {offer?.title}
                 </h1>
-                <FavoriteButton width='31' height='33' className='offer' offerId={offer.id} isFavorite={offer.isFavorite} />
+                <FavoriteButton width='31' height='33' className='offer' offerId={offer.id} isFavorite={offerWithFavorite.isFavorite} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
