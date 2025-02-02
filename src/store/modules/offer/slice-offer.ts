@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FeatureModule } from '../../../const';
-import { loadNearByOffer, loadOfferFull, loadReviews } from './actions-offer';
 import { OfferSliceType } from './type';
 import { fetchNearByOffers, fetchOfferComments, getOfferInfoByID } from './api-actions-offer';
 import { CommentType, OfferType, OfferTypeFull } from '../../../types';
@@ -53,17 +52,4 @@ export const offerFullSlice = createSlice({
       });
   },
 });
-
-// .addCase(loadOfferFull, (state, action) => {
-//   state.offerFull = action.payload;
-//   state.offerLoadingFull = false;
-// })
-// .addCase(loadNearByOffer, (state, action) => {
-//   state.offersNearBy = action.payload;
-// })
-// .addCase(loadReviews, (state, action) => {
-//   state.reviews = action.payload;
-// });
-//   }
-// });
 

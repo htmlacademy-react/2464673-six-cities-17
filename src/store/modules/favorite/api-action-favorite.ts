@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { OfferCommonType, OfferType, OfferTypeFull } from '../../../types';
+import { OfferType, OfferTypeFull } from '../../../types';
 import { StateType } from '../../types';
 import { store } from '../..';
 import { AxiosInstance } from 'axios';
@@ -18,8 +18,8 @@ export const loadFavoriteOfferCards = createAsyncThunk<
   ThunkArg
 >('data/loadFavoriteOfferCards',
   async (_arg, {extra: api}) => {
-    const { data } = await api.get<OfferType[]>(APIRoutes.Favorites);
-    return data;
+    const response = await api.get<OfferType[]>(APIRoutes.Favorites);
+    return response?.data;
   }
 );
 
@@ -27,7 +27,7 @@ export const uploadFavoriteStatus = createAsyncThunk<
   OfferType,
   { offerId: string; status: number },
   ThunkArg
->('data/uploadFavoriteStatus',
+>('data/changeFavorite',
   async ({ offerId, status }, { getState, extra: api }) => {
     const { data } = await api.post<OfferTypeFull>(`${APIRoutes.Favorites}/${offerId}/${status}`);
     const {offers} = getState().cities;

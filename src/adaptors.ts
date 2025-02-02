@@ -1,5 +1,5 @@
 import { OFFER_CATEGORIES, REVIEW_MAX_COUNT } from './const';
-import { CityName, OfferType, ReviewsType } from './types';
+import { CityName, OfferType, OfferTypeFull, ReviewsType } from './types';
 
 type OfferGroups = Record<CityName, OfferType[]>;
 
@@ -28,3 +28,8 @@ export function mapComments(comments: ReviewsType[]): ReviewsType[] {
 export function getOfferCategory(type: string): string {
   return OFFER_CATEGORIES[type];
 }
+
+export function isOfferFavorite<T extends OfferType | OfferTypeFull>(favoriteOffers: T[], offerId: string): boolean {
+  return favoriteOffers.find((favorite) => favorite.id === offerId)?.isFavorite || false;
+}
+

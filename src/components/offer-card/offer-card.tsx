@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 
 import { CardType, OfferType } from '../../types';
 import FavoriteButton from '../favorite-button/favorite-button';
+import { useAppSelector } from '../../store/storeHooks';
+import { selectFavoriteOffers } from '../../store/modules/favorite/selectors';
+import { isOfferFavorite } from '../../adaptors';
 
 type Props = {
   offer: OfferType;
@@ -9,9 +12,16 @@ type Props = {
   onHandleActiveOfferChange?: (id: string | undefined) => void;
 }
 
-export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: Props): JSX.Element {
-  const {rating, previewImage, price, isPremium, title, type, isFavorite} = offer;
+export default function OfferCard({ offer, cardType, onHandleActiveOfferChange }: Props): JSX.Element {
+  const { rating, previewImage, price, isPremium, title, type} = offer;
   const placeRating = rating || 0;
+  const linkTo = `/offer/${offer.id}`;
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
+
+  const offerWithFavorite: OfferType = {
+    ...offer,
+    isFavorite: isOfferFavorite(favoriteOffers, offer.id),
+  };
 
   return (
     <article
@@ -25,7 +35,7 @@ export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: 
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={linkTo}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -41,7 +51,7 @@ export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: 
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton width='18' height='19' className="place-card" offerId={offer.id} isFavorite={isFavorite}/>
+          <FavoriteButton width='18' height='19' className="place-card" offerId={offer.id} isFavorite={offerWithFavorite.isFavorite} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -50,7 +60,7 @@ export default function OfferCard({offer, cardType, onHandleActiveOfferChange}: 
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to="#">{title}</Link>
+          <Link to={linkTo}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

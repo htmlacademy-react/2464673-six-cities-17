@@ -5,12 +5,19 @@ import { OfferType } from '../../types';
 import { getOfferGroups } from '../../adaptors';
 import { useAppSelector } from '../../store/storeHooks';
 import { selectFavoriteOffers } from '../../store/modules/favorite/selectors';
+import FavoriteEmptyPage from '../favorites-empty-page/favorite-empty-page';
 
 
 export default function FavoritePage(): JSX.Element {
   const offers = useAppSelector(selectFavoriteOffers);
   const offerGroups = getOfferGroups(offers);
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
 
+  if (favoriteOffers.length === 0) {
+    return (
+      <FavoriteEmptyPage />
+    );
+  }
   return (
     <div className="page">
       <Header />
