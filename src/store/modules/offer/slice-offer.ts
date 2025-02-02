@@ -52,4 +52,4 @@ export const offerFullSlice = createSlice({
       });
   },
 });
-export const { updateFavoriteOffer } = offerFullSlice.actions;
+
